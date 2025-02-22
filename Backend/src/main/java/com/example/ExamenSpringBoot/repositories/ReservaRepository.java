@@ -14,5 +14,5 @@ import java.util.Optional;
 @Repository
 public interface ReservaRepository extends CrudRepository<Reserva, Integer> {
     List<Reserva> findByUsuarioId(Integer usuarioId);
-    List<Reserva> findByFechaAndEstadoId(Date fecha, Integer estadoId);
+    List<Reserva> findByFechaAndEstadoReservaId(Date fecha, Integer estadoId);
 }

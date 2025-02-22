@@ -1,7 +1,9 @@
 package com.example.ExamenSpringBoot.dto;
 
 public class EspacioResponseDTO {
+    private  Integer id;
     private String nombreTipoEspacio;
+    private Integer idTipoEspacio;
     private String nombre;
     private Integer capacidad;
     private Boolean disponibilidad;
@@ -46,5 +48,21 @@ public class EspacioResponseDTO {
 
     public void setDisponibilidad(Boolean disponibilidad) {
         this.disponibilidad = disponibilidad;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Integer getIdTipoEspacio() {
+        return idTipoEspacio;
+    }
+
+    public void setIdTipoEspacio(Integer idTipoEspacio) {
+        this.idTipoEspacio = idTipoEspacio;
     }
 }

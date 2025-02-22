@@ -28,8 +28,9 @@ public class EspacioService {
             Espacio espacio = new Espacio();
             espacio.setTipoEspacio(tipoEspacioRepository.findById(espacioRequestDTO.getIdTipoEspacio()).orElseThrow());
             espacio.setCapacidad(espacioRequestDTO.getCapacidad());
-            espacio.setDisponibilidad(true);
+            espacio.setDisponibilidad(espacioRequestDTO.getDisponibilidad());
             espacio.setNombre(espacioRequestDTO.getNombre());
+
 
             espacioRepository.save(espacio);
             return true;
@@ -79,6 +80,7 @@ public class EspacioService {
                     espacioResponseDTO.setDisponibilidad(espacio.getDisponibilidad());
                     espacioResponseDTO.setNombre(espacio.getNombre());
                     espacioResponseDTO.setNombreTipoEspacio(espacio.getTipoEspacio().getNombre());
+                    espacioResponseDTO.setId(espacio.getId());
                     return espacioResponseDTO;
                 }).collect(Collectors.toList());
 
@@ -109,4 +111,23 @@ public class EspacioService {
             return ResponseEntity.badRequest().body("Error obteniendo espacios filtrados");
         }
     }
+
+    public ResponseEntity<?> obtenerPorId(Integer id){
+
+        try{
+            Espacio espacio = espacioRepository.findById(id).orElseThrow();
+                EspacioResponseDTO espacioResponseDTO = new EspacioResponseDTO();
+                espacioResponseDTO.setCapacidad(espacio.getCapacidad());
+                espacioResponseDTO.setDisponibilidad(espacio.getDisponibilidad());
+                espacioResponseDTO.setNombre(espacio.getNombre());
+                espacioResponseDTO.setNombreTipoEspacio(espacio.getTipoEspacio().getNombre());
+                espacioResponseDTO.setId(espacio.getId());
+                espacioResponseDTO.setIdTipoEspacio(espacio.getTipoEspacio().getId());
+                return ResponseEntity.ok(espacioResponseDTO);
+        } catch (Exception e){
+            System.out.println(e);
+            return ResponseEntity.badRequest().body("Error obteniendo espacio por id");
+        }
+    }
+
 }

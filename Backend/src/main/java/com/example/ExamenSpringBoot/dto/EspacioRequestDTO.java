@@ -49,4 +49,14 @@ public class EspacioRequestDTO {
     public void setDisponibilidad(Boolean disponibilidad) {
         this.disponibilidad = disponibilidad;
     }
+
+    @Override
+    public String toString() {
+        return "EspacioRequestDTO{" +
+                "idTipoEspacio=" + idTipoEspacio +
+                ", nombre='" + nombre + '\'' +
+                ", capacidad=" + capacidad +
+                ", disponibilidad=" + disponibilidad +
+                '}';
+    }
 }

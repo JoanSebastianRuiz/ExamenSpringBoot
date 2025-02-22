@@ -92,7 +92,7 @@ public class ReservaService {
 
     public ResponseEntity<?> obtenerReservasFiltradas(Date fecha, Integer idEstado){
         try{
-            List<Reserva> reservas = reservaRepository.findByFechaAndEstadoId(fecha, idEstado);
+            List<Reserva> reservas = reservaRepository.findByFechaAndEstadoReservaId(fecha, idEstado);
             return ResponseEntity.ok(reservas);
         } catch (Exception e){
             System.out.println(e);

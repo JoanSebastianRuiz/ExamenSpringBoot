@@ -21,6 +21,12 @@ public class EspacioController {
         return espacioService.obtenerEspacios();
     }
 
+    @GetMapping("{id}")
+    public ResponseEntity<?> obtenerEspacio(@PathVariable Integer id){
+
+        return espacioService.obtenerPorId(id);
+    }
+
     @GetMapping("/filtrados")
     public ResponseEntity<?> obtenerEspaciosFiltrados(@RequestParam(name = "fecha") Date fecha, @RequestParam("horainicio")Time horainicio, @RequestParam("horafin")Time horafin, @RequestParam("tipo") String tipo){
         return espacioService.obtenerEspaciosFiltrados(fecha, horainicio, horafin, tipo);
@@ -46,6 +52,7 @@ public class EspacioController {
 
     @PostMapping
     public ResponseEntity<String> crearEspacio(@RequestBody EspacioRequestDTO espacioRequestDTO){
+        System.out.println(espacioRequestDTO);
         if(espacioService.crearEspacio(espacioRequestDTO)){
             return ResponseEntity.ok("Espacio creado correctamente");
         } else{
