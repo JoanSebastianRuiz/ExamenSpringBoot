@@ -16,3 +16,33 @@ Java 17 o superior.
 PostgreSQL instalado y configurado.
 Maven para la gestión de dependencias.
 Swagger UI para la documentación interactiva de la API.
+
+## API Documentation
+
+### Base URL
+http://localhost:8081
+
+---
+
+## Endpoints
+
+### 1. **Actualizar Reserva**
+- **Endpoint:** `/reservas/{id}`
+- **Método HTTP:** `PUT`
+- **Descripción:** Actualiza la información de una reserva existente.
+- **Parámetros:**
+  - `id` (path parameter, requerido): El ID de la reserva a actualizar.
+- **Cuerpo de la petición:**
+```json
+{
+  "documentoUsuario": "12345678",
+  "idEspacio": 1,
+  "fecha": "2025-02-21T10:00:00",
+  "horaInicio": "2025-02-21T10:00:00",
+  "horaFin": "2025-02-21T12:00:00"
+}
+
+Respuesta (200 OK):
+{
+  "message": "Reserva actualizada correctamente"
+}
