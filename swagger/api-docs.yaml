@@ -1,0 +1,295 @@
+openapi: 3.0.1
+info:
+  title: OpenAPI definition
+  version: v0
+servers:
+- url: http://localhost:8081
+  description: Generated server url
+paths:
+  /reservas/{id}:
+    put:
+      tags:
+      - reserva-controller
+      operationId: actualizarReserva
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ReservaRequestDTO"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+  /reservas/{id}/confirmar:
+    put:
+      tags:
+      - reserva-controller
+      operationId: confirmarReserva
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+  /reservas/{id}/cancelar:
+    put:
+      tags:
+      - reserva-controller
+      operationId: cancelarReserva
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+  /espacios/{id}:
+    get:
+      tags:
+      - espacio-controller
+      operationId: obtenerEspacio
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+    put:
+      tags:
+      - espacio-controller
+      operationId: actualizarEspacio
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EspacioRequestDTO"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+    delete:
+      tags:
+      - espacio-controller
+      operationId: eliminarEspacio
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+  /reservas:
+    get:
+      tags:
+      - reserva-controller
+      operationId: obtenerReservasFiltradas
+      parameters:
+      - name: fecha
+        in: query
+        required: true
+        schema:
+          type: string
+          format: date-time
+      - name: idestado
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+    post:
+      tags:
+      - reserva-controller
+      operationId: crearReserva
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ReservaRequestDTO"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+  /espacios:
+    get:
+      tags:
+      - espacio-controller
+      operationId: obtenerEspacios
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+    post:
+      tags:
+      - espacio-controller
+      operationId: crearEspacio
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EspacioRequestDTO"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+  /tipos-espacio:
+    get:
+      tags:
+      - tipo-espacio-controller
+      operationId: obtenerTiposEspacio
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+  /estados-reserva:
+    get:
+      tags:
+      - estado-reserva-controller
+      operationId: obtenerEstadosReserva
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+  /espacios/filtrados:
+    get:
+      tags:
+      - espacio-controller
+      operationId: obtenerEspaciosFiltrados
+      parameters:
+      - name: fecha
+        in: query
+        required: true
+        schema:
+          type: string
+          format: date-time
+      - name: horainicio
+        in: query
+        required: true
+        schema:
+          type: string
+          format: date-time
+      - name: horafin
+        in: query
+        required: true
+        schema:
+          type: string
+          format: date-time
+      - name: tipo
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+components:
+  schemas:
+    ReservaRequestDTO:
+      type: object
+      properties:
+        documentoUsuario:
+          type: string
+        idEspacio:
+          type: integer
+          format: int32
+        fecha:
+          type: string
+          format: date-time
+        horaInicio:
+          type: string
+          format: date-time
+        horaFin:
+          type: string
+          format: date-time
+    EspacioRequestDTO:
+      type: object
+      properties:
+        idTipoEspacio:
+          type: integer
+          format: int32
+        nombre:
+          type: string
+        capacidad:
+          type: integer
+          format: int32
+        disponibilidad:
+          type: boolean
